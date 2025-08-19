@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analysis Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h2 { color: #333; }
+        textarea { width: 100%; max-width: 600px; height: 100px; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #result { margin-top: 20px; font-size: 16px; color: #333; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h2>Sentiment Analysis Demo</h2>
+    <textarea id="inputText" placeholder="Enter a movie review..."></textarea><br>
+    <button onclick="predict()">Predict Sentiment</button>
+    <div id="result"></div>
+
+    <script>
+        async function predict() {
+            const text = document.getElementById("inputText").value;
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerText = "";
+            resultDiv.classList.remove("error");
+
+            if (!text.trim()) {
+                resultDiv.classList.add("error");
+                resultDiv.innerText = "Please enter some text.";
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:8008/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text: text })
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || `HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                if (data.error) {
+                    resultDiv.classList.add("error");
+                    resultDiv.innerText = `Error: ${data.error}`;
+                } else {
+                    resultDiv.innerText = 
+                        `Sentiment: ${data.sentiment} (Confidence: ${(data.confidence * 100).toFixed(2)}%)`;
+                }
+            } catch (error) {
+                resultDiv.classList.add("error");
+                resultDiv.innerText = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

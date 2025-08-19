@@ -1,0 +1,30 @@
+# Core libraries
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.4.2
+
+# Transformers and NLP
+transformers==4.36.2
+datasets==2.19.1
+torch==2.2.2
+accelerate==0.23.0
+safetensors==0.4.2
+wordcloud
+# Model serving and monitoring
+fastapi>=0.100.0
+uvicorn>=0.22.0
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# Training and logging
+tqdm>=4.65.0
+mlflow
+# Load testing
+locust>=2.15.1
+
+# Code style
+flake8==7.0.0
+prometheus-client
+# Kaggle support
+kaggle==1.6.6
+prometheus-fastapi-instrumentator==6.0.0

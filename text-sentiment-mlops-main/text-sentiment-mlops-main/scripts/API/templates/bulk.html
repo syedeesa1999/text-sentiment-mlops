@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bulk Sentiment Analysis</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 2rem 1rem;
+      color: #2c3e50;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Smaller, subtler title */
+    h1 {
+      font-weight: 600;
+      font-size: 1.8rem; /* smaller */
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #555a6e; /* softer gray-blue */
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    form {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
+      margin-bottom: 3rem;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #2d3748;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1.5px solid #cbd5e0;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    textarea:focus {
+      border-color: #3182ce;
+      outline: none;
+    }
+
+    input[type="file"] {
+      flex-grow: 1;
+      border-radius: 8px;
+      border: 1.5px solid #cbd5e0;
+      padding: 0.6rem;
+      font-size: 1rem;
+      font-family: 'Roboto', sans-serif;
+      cursor: pointer;
+    }
+
+    .form-controls {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    button {
+      background: #3182ce;
+      color: white;
+      border: none;
+      font-weight: 600;
+      padding: 0.75rem 1.8rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+    }
+
+    button:hover:not(:disabled) {
+      background: #2c5282;
+    }
+
+    button:disabled {
+      background: #a0aec0;
+      cursor: not-allowed;
+    }
+
+    #loading {
+      text-align: center;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .spinner {
+      margin: auto;
+      width: 36px;
+      height: 36px;
+      border: 4px solid #e2e8f0;
+      border-top: 4px solid #3182ce;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: 2rem;
+      color: #1a202c;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    /* This is the key change: single row with three columns, each ~30% width */
+    .insights-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: nowrap;
+    }
+
+    /* Cards are fixed to ~30% width */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.08);
+      flex: 0 0 30%;
+      max-width: 30%;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card h3 {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    .top-words-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      max-height: 260px;
+      overflow-y: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+    }
+
+    .top-words-list li {
+      padding: 0.4rem 0.8rem;
+      border-bottom: 1px solid #edf2f7;
+      font-weight: 500;
+      color: #4a5568;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+    }
+
+    .top-words-list li:last-child {
+      border-bottom: none;
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+      height: auto;
+    }
+
+    .results-table-wrapper {
+      overflow-x: auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
+      padding: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+      color: #2d3748;
+      font-size: 1rem;
+    }
+
+    th {
+      background-color: #edf2f7;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: #ebf8ff;
+    }
+
+    a.back-link {
+      display: block;
+      text-align: center;
+      margin-top: 3rem;
+      font-weight: 600;
+      color: #3182ce;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    a.back-link:hover {
+      color: #2c5282;
+      text-decoration: underline;
+    }
+
+    /* Make sure on very small screens, it stacks */
+    @media (max-width: 950px) {
+      .insights-row {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+      .card {
+        flex: 1 1 100%;
+        max-width: 100%;
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bulk Sentiment Analysis</h1>
+
+  <form id="bulk-form" method="post" action="/bulk" enctype="multipart/form-data" novalidate>
+    <label for="comments"><strong>Enter comments (one per line):</strong></label>
+    <textarea id="comments" name="comments" placeholder="Great service!\nTerrible experience...">{% if processed %}{{ comments }}{% endif %}</textarea>
+
+    <div class="form-controls">
+      <input type="file" name="file" accept=".txt,.csv" />
+      <button type="submit" id="submit-btn">Analyze</button>
+    </div>
+
+    <div id="loading">
+      <div class="spinner"></div>
+      <p>Processing... Please wait.</p>
+    </div>
+  </form>
+
+  {% if processed %}
+  <h2>Insights</h2>
+  <div class="insights-row">
+    {% if top_words %}
+    <div class="card top-words">
+      <h3>Top Common Words</h3>
+      <ul class="top-words-list">
+        {% for word, count in top_words %}
+          <li><span>{{ word }}</span> <span>({{ count }})</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if wordcloud_img %}
+    <div class="card wordcloud">
+      <h3>Word Cloud</h3>
+      <img src="data:image/png;base64,{{ wordcloud_img }}" alt="Word Cloud" />
+    </div>
+    {% endif %}
+
+    {% if chart %}
+    <div class="card sentiment-chart">
+      <h3>Sentiment Distribution</h3>
+      <img src="data:image/png;base64,{{ chart }}" alt="Sentiment Distribution Pie Chart" />
+    </div>
+    {% endif %}
+  </div>
+
+  <h2>Comments Sentiment</h2>
+  <div class="results-table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Comment</th>
+          <th>Sentiment</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in results %}
+        <tr>
+          <td>{{ item.text }}</td>
+          <td>{{ item.sentiment }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  <a href="/" class="back-link">← Back to Home</a>
+
+  <script>
+    const form = document.getElementById("bulk-form");
+    const loading = document.getElementById("loading");
+    const submitBtn = document.getElementById("submit-btn");
+
+    form.addEventListener("submit", () => {
+      loading.style.display = "block";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Analyzing...";
+    });
+  </script>
+
+</body>
+</html>

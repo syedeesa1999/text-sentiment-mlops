@@ -1,0 +1,64 @@
+2025-03-31 20:58:29,887 - api - INFO - Loading model from models/saved/sentiment_model
+2025-03-31 20:58:59,527 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 20:58:59,584 - api - INFO - Model loaded successfully
+2025-03-31 20:58:59,585 - api - INFO - Starting API server
+2025-03-31 20:59:15,020 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 20:59:15,061 - api - INFO - Model loaded successfully
+2025-03-31 20:59:15,063 - api - INFO - Starting API server
+2025-03-31 20:59:21,877 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 20:59:21,917 - api - INFO - Model loaded successfully
+2025-03-31 20:59:21,944 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 20:59:21,982 - api - INFO - Model loaded successfully
+2025-03-31 21:01:45,289 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:01:45,332 - api - INFO - Model loaded successfully
+2025-03-31 21:01:45,335 - api - INFO - Starting API server
+2025-03-31 21:01:52,337 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:01:52,376 - api - INFO - Model loaded successfully
+2025-03-31 21:01:52,397 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:01:52,439 - api - INFO - Model loaded successfully
+2025-03-31 21:02:33,017 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:02:33,054 - api - INFO - Model loaded successfully
+2025-03-31 21:02:33,074 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:02:33,109 - api - INFO - Model loaded successfully
+2025-03-31 21:02:45,157 - api - INFO - Received prediction request: HELLO...
+2025-03-31 21:02:59,338 - api - INFO - Received prediction request: THIS MOVIE IS ABSOLUTE RUBBISH
+...
+2025-03-31 21:17:35,510 - api - INFO - Starting API server
+2025-03-31 21:17:43,348 - api - INFO - Application started at 2025-03-31 21:17:43.348686
+2025-03-31 21:17:43,348 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:17:43,409 - api - INFO - Model loaded successfully
+2025-03-31 21:19:26,221 - api - INFO - Starting API server
+2025-03-31 21:19:33,869 - api - INFO - Application started at 2025-03-31 21:19:33.868947
+2025-03-31 21:19:33,869 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:19:33,918 - api - INFO - Model loaded successfully
+2025-03-31 21:21:26,547 - api - INFO - Starting API server
+2025-03-31 21:21:33,245 - api - INFO - Application started at 2025-03-31 21:21:33.245213
+2025-03-31 21:21:33,245 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:21:33,291 - api - INFO - Model loaded successfully
+2025-03-31 21:24:01,485 - api - INFO - Starting API server
+2025-03-31 21:24:09,146 - api - INFO - Application started at 2025-03-31 21:24:09.146041
+2025-03-31 21:24:09,146 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:24:09,193 - api - INFO - Model loaded successfully
+2025-03-31 21:24:18,577 - api - INFO - Received prediction request: hello bad boy...
+2025-03-31 21:24:25,615 - api - INFO - Received prediction request: what are you doing
+...
+2025-03-31 21:24:41,369 - api - INFO - Received prediction request: you make a bad prediction previous one...
+2025-03-31 21:27:34,248 - api - INFO - Starting API server
+2025-03-31 21:27:42,164 - api - INFO - Application started at 2025-03-31 21:27:42.164321
+2025-03-31 21:27:42,164 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:27:42,226 - api - INFO - Model loaded successfully
+2025-03-31 21:28:02,036 - api - INFO - Received prediction request: this stats are good...
+2025-03-31 21:28:02,900 - api - INFO - Prediction: positive, Confidence: 0.58, Response time: 0.864s
+2025-03-31 21:28:14,178 - api - INFO - Received prediction request: this stats are amazing are worth to watch...
+2025-03-31 21:28:14,752 - api - INFO - Prediction: positive, Confidence: 0.70, Response time: 0.566s
+2025-03-31 21:30:39,544 - api - INFO - Received prediction request: this stats are not amazing and are not worth to wa...
+2025-03-31 21:31:42,830 - api - INFO - Starting API server
+2025-03-31 21:31:50,542 - api - INFO - Application started at 2025-03-31 21:31:50.542663
+2025-03-31 21:31:50,542 - api - INFO - Loading model from /Users/saliksaleem/Desktop/Projects/text-sentiment-mlops/models/saved/sentiment_model
+2025-03-31 21:31:50,589 - api - INFO - Model loaded successfully
+2025-03-31 21:31:51,873 - api - INFO - Received prediction request: this stats are not amazing and are not worth to wa...
+2025-03-31 21:31:52,943 - api - INFO - Prediction: negative, Confidence: 0.69, Response time: 1.069s
+2025-03-31 21:31:59,486 - api - INFO - Received prediction request: this stats are not amazing and are worth to watch...
+2025-03-31 21:32:00,062 - api - INFO - Prediction: negative, Confidence: 0.66, Response time: 0.575s
+2025-03-31 21:32:05,217 - api - INFO - Received prediction request: this stats are amazing and are worth to watch...
+2025-03-31 21:32:05,694 - api - INFO - Prediction: positive, Confidence: 0.72, Response time: 0.476s

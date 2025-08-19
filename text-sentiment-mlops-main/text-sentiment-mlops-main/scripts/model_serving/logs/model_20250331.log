@@ -1,0 +1,5 @@
+2025-03-31 21:02:45,650 - model - INFO - Prediction: positive | Confidence: 0.53 | Response time: 492.31ms
+2025-03-31 21:02:59,667 - model - INFO - Prediction: negative | Confidence: 0.74 | Response time: 325.36ms
+2025-03-31 21:24:19,440 - model - INFO - Prediction: negative | Confidence: 0.53 | Response time: 861.36ms
+2025-03-31 21:24:25,995 - model - INFO - Prediction: negative | Confidence: 0.57 | Response time: 380.14ms
+2025-03-31 21:24:43,865 - model - INFO - Prediction: negative | Confidence: 0.62 | Response time: 2495.35ms

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f9fc;
+        }
+        
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e6e6e6;
+        }
+        
+        p.description {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0 20px;
+            height: 150px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            animation: fadeIn 0.5s;
+        }
+        
+        .positive {
+            background-color: #e8f5e9;
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .negative {
+            background-color: #ffebee;
+            border-left: 5px solid #f44336;
+        }
+        
+        .error {
+            background-color: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        .examples {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .examples h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .example-item {
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .example-item:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Review Sentiment Analysis</h1>
+        <p class="description">Enter a movie review below to analyze whether the sentiment is positive or negative.</p>
+        
+        <form action="/predict" method="post">
+            <textarea name="review" placeholder="Type or paste your movie review here...">{{ review if review else "" }}</textarea>
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+        
+        {% if result %}
+            {% if error %}
+                <div class="error">
+                    <h3>Error:</h3>
+                    <p>{{ error }}</p>
+                </div>
+            {% else %}
+                <div class="result {{ sentiment.lower() }}">
+                    <h3>Analysis Result:</h3>
+                    <p><strong>Sentiment:</strong> {{ sentiment }}</p>
+                    <p><strong>Confidence:</strong> {{ confidence }}</p>
+                </div>
+            {% endif %}
+        {% endif %}
+        
+        <div class="examples">
+            <h3>Try these examples:</h3>
+            <div class="example-item" onclick="fillExample('This movie was fantastic! The acting was superb and the storyline kept me engaged throughout. Highly recommended!')">
+                Example 1: Positive review
+            </div>
+            <div class="example-item" onclick="fillExample('Terrible movie. The acting was wooden, the plot had holes big enough to drive a truck through, and I fell asleep halfway through.')">
+                Example 2: Negative review
+            </div>
+            <div class="example-item" onclick="fillExample('While the film had some interesting moments and decent visual effects, the confusing plot and mediocre character development left me feeling disappointed overall.')">
+                Example 3: Mixed review
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Sentiment Analysis powered by DistilBERT model via MLflow and DagsHub</p>
+    </footer>
+    
+    <script>
+        function fillExample(text) {
+            document.querySelector('textarea[name="review"]').value = text;
+        }
+    </script>
+</body>
+</html>
