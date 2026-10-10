@@ -475,7 +475,7 @@ After starting the API, you can test it using:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/salik786/text-sentiment-mlops.git
+   git clone https://github.com/syedeesa1999/text-sentiment-mlops.git
    cd text-sentiment-mlops
    ```
 
